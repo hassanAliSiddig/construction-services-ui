@@ -1,0 +1,136 @@
+body {
+  background-color: #D8C4A4;
+}
+
+
+
+.spinner-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f4f6f9;
+  z-index: 9999;
+  opacity: 0.7;
+}
+
+.loading-spinner {
+  width: 100px;
+  height: 100px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3F3F3F;
+  border-right: 10px solid #3F3F3F;
+  border-radius: 100%;
+  animation: spinner 1.0s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.login-form {
+  height: 80vh; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-background-image {
+  position: fixed;
+  background-size: cover;
+  opacity: 0.8;
+  z-index: -5;
+}
+
+/* .form-label, .form-check-label {
+  color: white;
+} */
+.remember-me{
+  cursor: pointer;
+}
+.remember-me:checked {
+  background-color: #3F3F3F
+}
+
+th, td {
+  font-size: 1rem;
+}
+
+div.card-header, .accordion-button, .accordion-button::after {
+  background-color: #3F3F3F !important;
+  color: white !important;
+}
+
+th {
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.construction-color-background {
+  background-color: #3F3F3F;
+  color: white;
+}
+.construction-color{
+  color: #3F3F3F;
+}
+.form-label {
+  color: #3F3F3F;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.construction-logo {
+  color: #3F3F3F;
+  font-size: 2rem;
+}
+
+.construction-logo-main {
+  color: #3F3F3F;
+  font-size: 2.5rem;
+}
+
+section {
+  padding: 0;
+}
+
+td, th {
+  white-space: nowrap;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 600;
+}
+
+.nav-link.active {
+  color: white !important;
+  background-color: #3F3F3F !important;
+}
+
+.construction-date-picker {
+  border-start-start-radius: 0;
+  /* display: inline; */
+}
+
+.text-expand {
+  overflow: hidden;
+  resize: both;
+  /* height: 2rem; */
+  /* white-space: normal; */
+}
+
+td {
+  text-align: center;
+}

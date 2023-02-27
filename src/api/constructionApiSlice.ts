@@ -18,7 +18,7 @@ export const constructionApiSlice = apiSlice.injectEndpoints({
         getConstructionRequests: builder.query<any[],any>({
             query: (params:any) => params.userRole == 'Admin' 
             ? `/construction-requests` 
-            :`/construction-requests?client.userId=${params.userId}`,
+            :`/construction-requests?client.userId=${params.userId}&_page=${params.pageNumber}&_limit=10`,
             keepUnusedDataFor: 5,
             transformResponse: (data:any[], meta, arg) => {
                 let updatedData = data.map(r => ({

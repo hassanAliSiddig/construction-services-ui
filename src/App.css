@@ -159,10 +159,14 @@ td, th {
   padding-right: 0.5rem !important;
 }
 
-/* th {
-  white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 10px;
-} */
+.page-item.active > .page-link {
+  background-color: #3F3F3F !important;
+  color: white !important;
+  box-shadow: #3F3F3F !important;
+  border-color: #3F3F3F !important;
+}
 
-
+.page-link, .page-link:hover {
+  color: black;
+  box-shadow: #3F3F3FEE !important;
+}

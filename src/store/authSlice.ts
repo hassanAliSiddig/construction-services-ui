@@ -6,10 +6,10 @@ const authSlice = createSlice({
     reducers: {
         setCredentials: (state, action) => {
             const { user, accessToken } = action.payload
-            state.user = user
             state.token = accessToken
             let decryptedToken = parseJwt(accessToken)
             state.decryptedToken = decryptedToken
+            state.user = user ?? decryptedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
             state.userRole = !!decryptedToken ? decryptedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]:null
         },
         logOut: (state) => {

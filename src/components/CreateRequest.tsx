@@ -1,123 +1,134 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetConstructionCompaniesListQuery, useGetConstructionProjectsListQuery, useGetConstructionRequestsQuery, useSubmitConstructionRequestMutation, useUpdateConstructionRequestMutation } from '../store/constructionApiSlice';
+import { useNavigate } from 'react-router-dom';
+import { useGetConstructionCompaniesListQuery, useGetConstructionRequestsQuery, useGetCurrentClientQuery, useSubmitConstructionRequestMutation, useUpdateConstructionRequestMutation } from '../api/constructionApiSlice';
+import { selectCurrentUser, selectDecryptedToken, selectUserRole } from '../store/authSlice';
 import { selectToBeEditedRequest, setConstructionRequestsList } from '../store/constructionSlice';
 import LoadingSpinner from './LoadingSpinner';
 
 type Props = {}
 
 const CreateRequest = (props: Props) => {
-
-    const [description, setDescription] = useState('')
-    const [remarks, setRemarks] = useState('')
-    const [projectID, setProjectID] = useState<number>(1)
-    const [companyID, setCompanyID] = useState<number>(1)
-
-    const {
-        data: companiesList,
-        isLoading: isCompaniesListLoading,
-    } = useGetConstructionCompaniesListQuery(undefined)
-
-    const {
-        data: projectsList,
-        isLoading: isProjectsListLoading,
-    } = useGetConstructionProjectsListQuery(undefined)
-
-
+    
     const closeModalRef = useRef<HTMLButtonElement>(null)
+    const navigate = useNavigate()
+    
+    const [errorMsg, setErrorMsg] = useState('')
+    const decryptedToken = useSelector(selectDecryptedToken)
+    const username = useSelector(selectCurrentUser)
 
-    let request = useSelector(selectToBeEditedRequest)
-    const [submitConstructionRequest, { isLoading }] = useSubmitConstructionRequestMutation()
+    const [projectName, setProjectName] = useState('')
+    const [description, setDescription] = useState('')
+    const [requestedStartDate, setRequestedStartDate] = useState<Date>(new Date())
+    const [projectAddress, setProjectAddress] = useState('')
 
-    const submitRequest = async (e: FormEvent<HTMLFormElement>) => {
+    const {
+        data: currentClient,
+        isLoading: isGetCurrentClientLoading
+    } = useGetCurrentClientQuery(decryptedToken?.userId, { skip: !decryptedToken?.userId })
+
+    const [submitRequest, { isLoading }] = useSubmitConstructionRequestMutation()
+
+    const createRequest = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         let requestBody = {
+            projectName,
             description,
-            remarks,
-            projectID,
-            companyID
+            requestedStartDate: requestedStartDate.toJSON(),
+            client: currentClient,
+            status: {
+                "id": 1,
+                "name": "Submitted"
+              },
+            projectAddress,
+            addedBy:username,
+            addedOn: new Date(),
+            paymentOrderId: projectName + ' (' + nanoid(6) +')'
         }
 
         try {
-
-            let response = await submitConstructionRequest(requestBody).unwrap()
-
+            let response = await submitRequest(requestBody).unwrap()
+            navigate('/')
         } catch (error) {
             console.log(error)
-            alert('The creation of request failed')
+            alert('The create request failed')
         } finally {
             closeModalRef?.current?.click()
-            window.location.reload()
         }
     }
 
-    if (isLoading || isCompaniesListLoading || isProjectsListLoading) {
+    if (isLoading) {
         return (<LoadingSpinner display={true}></LoadingSpinner>)
     }
 
     return (
         <section className="card">
             <div className="card-header">
-                <h6 className="card-title">Create New Request Form</h6>
+                <h6 className="card-title">Create Construction Request Form</h6>
             </div>
             <div className="card-body">
-                <form onSubmit={e => submitRequest(e)}>
+                <form onSubmit={e => createRequest(e)}>
                     <div className='row'>
-                        <div className="col mb-4">
+                        
+                        <div className="col-md-6 mb-4">
+                            <label className="form-label">Project Name</label>
+                            <input
+                                placeholder='Please enter your project name here'
+                                required
+                                type={'text'}
+                                className="form-control"
+                                value={projectName}
+                                onChange={e => setProjectName(e.target.value)}
+                            />
+                        </div>
+                        <div className="col-md-12 mb-4">
                             <label className="form-label">Description</label>
                             <textarea
-                            rows={1}
+                                placeholder='Please enter the exact description of the construction requirements'
                                 required
+                                className="form-control"
                                 value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                className="form-control"
-                            ></textarea>
+                                onChange={e => setDescription(e.target.value)}
+                            />
                         </div>
-                    </div>
-                    <div className='row'>
-                        <div className="col mb-4">
-                            <label className="form-label">Remarks</label>
-                            <textarea
-                            rows={1}
+                        <div className="col-md-12 mb-4">
+                            <label className="form-label">Project Address</label>
+                            <input
                                 required
-                                value={remarks}
-                                onChange={(e) => setRemarks(e.target.value)}
+                                type={'text'}
                                 className="form-control"
-                            ></textarea>
+                                placeholder='Building, Street, City, Country'
+                                value={projectAddress}
+                                onChange={e => setProjectAddress(e.target.value)}
+                            />
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col mb-4">
-                            <label className="form-label">Project</label>
-                            <select onChange={e => setProjectID(+e.target.value)} defaultValue={projectID} className="form-select">
-                                <option value=""></option>
-                                {(projectsList as any[]).map((project) => (
-                                    <option value={project.projectID} key={project.projectID}>{project.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="col mb-4">
-                            <label className="form-label">Company</label>
-                            <select onChange={e => setCompanyID(+e.target.value)} defaultValue={companyID} className="form-select">
-                                <option value=""></option>
-                                {(companiesList as any[]).map((company) => (
-                                    <option value={company.companyID} key={company.companyID}>{company.name}</option>
-                                ))}
-                            </select>
+                        <div className="col-md-6 mb-4">
+                            <label className="form-label">Requested Start Date</label>
+
+                            <DatePicker
+                                required
+                                dateFormat="dd/MM/yyyy"
+                                className="form-control"
+                                placeholderText='Click to select a date'
+                                selected={requestedStartDate}
+                                minDate={new Date()}
+                                onChange={(date: Date) => setRequestedStartDate(date)}
+                            />
+
                         </div>
                     </div>
                     <div className="row">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }} className="col">
                             <button ref={closeModalRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type={'submit'} style={{ backgroundColor: '#3F3F3F' }} value="Save" className='btn btn-secondary' />
+                            <input type={'submit'} value="Submit" className='btn construction-btn' />
                         </div>
                     </div>
                 </form>
             </div>
         </section>
-
     )
 }
 

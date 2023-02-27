@@ -1,3 +1,7 @@
+html, body, #root{
+  height: 100%;
+}
+
 body {
   background-color: #D8C4A4;
 }
@@ -38,7 +42,7 @@ body {
 }
 
 .login-form {
-  height: 80vh; 
+  height: 100%; 
   display: flex; 
   flex-direction: column;
   justify-content: center;
@@ -48,7 +52,7 @@ body {
 .login-background-image {
   position: fixed;
   background-size: cover;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   z-index: -5;
 }
 
@@ -62,19 +66,15 @@ body {
   background-color: #3F3F3F
 }
 
-th, td {
-  font-size: 1rem;
-}
 
 div.card-header, .accordion-button, .accordion-button::after {
   background-color: #3F3F3F !important;
+  border-color: #3F3F3F !important;
   color: white !important;
 }
 
-th {
-  white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 10px;
+.card {
+  border-color: #3F3F3F !important;
 }
 
 .construction-color-background {
@@ -87,7 +87,7 @@ th {
 .form-label {
   color: #3F3F3F;
   font-weight: 600;
-  font-size: 1.1rem;
+  /* font-size: 1rem; */
 }
 .construction-logo {
   color: #3F3F3F;
@@ -96,17 +96,11 @@ th {
 
 .construction-logo-main {
   color: #3F3F3F;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 section {
   padding: 0;
-}
-
-td, th {
-  white-space: nowrap;
-  padding-left: 0.5rem !important;
-  padding-right: 0.5rem !important;
 }
 
 .nav-link {
@@ -124,13 +118,51 @@ td, th {
   /* display: inline; */
 }
 
-.text-expand {
-  overflow: hidden;
-  resize: both;
-  /* height: 2rem; */
-  /* white-space: normal; */
+section {
+  border: none;
 }
 
-td {
-  text-align: center;
+.construction-btn {
+  background-color: #3F3F3F;
+  border-color: #3F3F3F;
+  box-shadow:#3F3F3F;
+  color: white;
 }
+
+.construction-btn:hover {
+  background-color: #3F3F3FEE;
+  color: white;
+}
+
+
+.table td, 
+.table th {
+   white-space: nowrap;
+    min-width: 10rem;
+    max-width: 20rem;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.text-expand {
+  overflow: hidden;
+  height: 1rem;
+  /* resize: both; */
+  /* word-wrap: break-word; */
+  white-space: nowrap;
+
+}
+
+td, th {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+/* th {
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
+} */
+
+

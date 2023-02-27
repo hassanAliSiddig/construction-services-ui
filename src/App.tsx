@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Unauthorized from './components/Unauthorized'
 import RequireAuth from './components/RequireAuth'
 import Home from './components/Home'
+import PersistLogin from './components/PersistLogin'
 
 registerLocale('en-GB', enGB)
 setDefaultLocale('en-GB');
@@ -18,13 +19,14 @@ function App() {
     <>
     {/* <img className='login-background-image' src="background.jpg" alt="cover" /> */}
     <Routes>
-        <Route path={`/login`} element={<Login />} />
+        <Route path={`/login`} element={<Login pageFor='Client' />} />
+        <Route path={`/login/admin`} element={<Login pageFor='Admin' />} />
         <Route path={`/unauthorized`} element={<Unauthorized />} />
-        {/* <Route element={<PersistLogin />}> */}
+        <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />} >
             <Route path={`/*`} element={<Home />} />
           </Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </>
   )

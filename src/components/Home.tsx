@@ -1,13 +1,17 @@
 import { skipToken } from '@reduxjs/toolkit/dist/query/react'
-import React, { useReducer, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useLogoutQuery } from '../store/authApiSlice'
+import React, { useEffect, useReducer, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import { useLogoutQuery } from '../api/authApiSlice'
+import { useGetConstructionRequestStatusListQuery } from '../api/constructionApiSlice'
 import { selectUserRole } from '../store/authSlice'
+import { selectStatusList } from '../store/constructionSlice'
 import CreateRequest from './CreateRequest'
 import EditRequest from './EditRequest'
 import LoadingSpinner, { spinnerReducer } from './LoadingSpinner'
+import PaymentPage from './PaymentPage'
 import Requests from './Requests'
+import Unauthorized from './Unauthorized'
 
 type Props = {}
 
@@ -37,7 +41,7 @@ const Home = (props: Props) => {
       <nav className="navbar header-color">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-          <i className="construction-logo bi bi-cone-striped">&nbsp; Construction Services</i>
+            <i className="construction-logo bi bi-cone-striped">&nbsp; Construction Services</i>
           </a>
           <span onClick={() => signOut()}>
 
@@ -46,22 +50,26 @@ const Home = (props: Props) => {
         </div>
       </nav>
       <br />
-      <main>
-        <Requests />
-        <div hidden={userRole != 'Admin'} className="modal fade" id="EditModal" tabIndex={-1} aria-labelledby="EditModalLabel" aria-hidden="true">
+      <main className='container-fluid'>
+        <Routes>
+          <Route path={`/*`} element={<Requests />} />
+          <Route path={`/create-request`} element={userRole === 'Client' ? <CreateRequest /> : <Unauthorized />} />
+        </Routes>
+        <div className="modal fade modal-lg" id="EditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="EditModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
               <EditRequest />
             </div>
           </div>
         </div>
-        <div hidden={userRole != 'Client'} className="modal fade" id="CreateModal" tabIndex={-1} aria-labelledby="CreateModalLabel" aria-hidden="true">
+        <div className="modal fade modal-lg" id="PaymentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="PaymentModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
-              <CreateRequest />
+              <PaymentPage />
             </div>
           </div>
         </div>
+
       </main>
     </>
   )

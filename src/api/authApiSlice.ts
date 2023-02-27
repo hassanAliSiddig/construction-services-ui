@@ -2,12 +2,11 @@ import { apiSlice } from "./apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation({
+        login: builder.query({
             query: (credentials: any) => ({
-                url: '/auth/get-access-token',
-                method: 'POST',
-                body: {...credentials}
-            })
+                url: `/auth/get-access-token?username=${credentials.username}&password=${credentials.password}`,
+                method: 'GET'
+            }),
         }),
         refreshToken: builder.query({
             query: () => '/auth/refresh-access-token',
@@ -19,4 +18,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useLoginMutation, useRefreshTokenQuery, useLogoutQuery } = authApiSlice
+export const { useLazyLoginQuery, useRefreshTokenQuery, useLogoutQuery, useLazyLogoutQuery } = authApiSlice

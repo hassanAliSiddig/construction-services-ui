@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "role": "Admin",
+      "password": "LetAdminIn..2023",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImFkbWluIiwianRpIjoiYTFkYmQ3OGMtYzczYi00MzBkLTlmZjEtOTI4MTI0MWE4NjMwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE2NzczMzU4MDUsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMDEiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDoqIn0.3AFTSImhzvmmNBAJyjOM8py4q5o6ZliXiaoztpo-aKY"
+    },
+    {
+      "id": 2,
+      "username": "TestClient1",
+      "role": "Client",
+      "password": "LetClient1In..2023",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IlRlc3RDbGllbnQxIiwianRpIjoiZThmMTc5NzctZDdjOS00NDgzLWFjMzItYzRmZTdjZmMxNDMwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50IiwiZXhwIjoxNjc3MzM2MDQyLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDAxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6KiJ9.8rNMangdXISV_IgaOqAA06DV_SdRpAkD5laH1u8-6kY"
+    },
+    {
+      "id": 3,
+      "username": "TestClient2",
+      "role": "Client",
+      "password": "LetClient2In..2023",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IlRlc3RDbGllbnQyIiwianRpIjoiZjMzNjQ1NTUtZmQyNi00YmY4LWFmOTctMDliN2FiOGQyYTFjIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50IiwiZXhwIjoxNjc3MzM2MDc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDAxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6KiJ9.UY5YhEfK6osDU-bSdCP7zZYwJWDyqIFamgIyz_1Oadg"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "fullName": "The First Client",
+      "address": "123 Main Street",
+      "email": "info@abccompany.com",
+      "phone": "+971508694311",
+      "userId": 2
+    },
+    {
+      "id": 2,
+      "fullName": "The Second Client",
+      "address": "Second Client Address",
+      "email": "info@xyzcompany.com",
+      "phone": "+971508694311",
+      "userId": 3
+    }
+  ],
+  "construction-requests": [
+    {
+      "id": 1,
+      "projectName": "Firs Project",
+      "description": "First Request Description",
+      "remarks": "First Request Remarks Updated",
+      "requestedStartDate": "2023-02-23T00:00:00.000Z",
+      "startDate": "2023-03-03T00:00:00.000Z",
+      "estimatedEndDate": "2027-02-18T00:00:00.000Z",
+      "paymentAmount": 150000,
+      "client": {
+        "id": 1,
+        "fullName": "The First Client",
+        "address": "123 Main Street",
+        "email": "info@abccompany.com",
+        "phone": "+971508694311",
+        "userId": 2
+      },
+      "paymentAuthCode": null,
+      "paymentDate": null,
+      "paymentOrderId": null,
+      "projectAddress": "564, 1st street, Sharjah",
+      "status": {
+        "id": 4,
+        "name": "In Progress"
+      },
+      "company": {
+        "id": 1,
+        "name": "ABC Company",
+        "address": "123 Main Street",
+        "email": "info@abccompany.com",
+        "phone": "050-555-1234"
+      },
+      "addedBy": "TestClient1",
+      "addedOn": "2023-02-11T00:00:00.000Z",
+      "startDateString": "03/03/2023",
+      "estimatedEndDateString": "20/02/2027",
+      "addedOnString": "20/02/2027",
+      "requestedStartDateAsString": "23/02/2023"
+    },
+    {
+      "projectName": "Project Two",
+      "description": "Residential Building",
+      "requestedStartDate": "2023-03-05T17:15:23.000Z",
+      "client": {
+        "id": 1,
+        "fullName": "The First Client",
+        "address": "123 Main Street",
+        "email": "info@abccompany.com",
+        "phone": "+971508694311",
+        "userId": 2
+      },
+      "status": {
+        "id": 3,
+        "name": "Payment Successful"
+      },
+      "projectAddress": "Al Wihda Street",
+      "addedBy": "TestClient1",
+      "addedOn": "2023-02-27T17:17:02.902Z",
+      "paymentOrderId": "Project Two (7_Rw3C)",
+      "id": 2,
+      "startDateString": "03/03/2023",
+      "estimatedEndDateString": "01/04/2023",
+      "addedOnString": "27/02/2023, 9:17:02 PM",
+      "requestedStartDateAsString": "05/03/2023",
+      "paymentDate": "2023-02-27T17:47:26.078Z",
+      "startDate": "2023-03-02T20:00:00.000Z",
+      "estimatedEndDate": "2023-03-31T20:00:00.000Z",
+      "remarks": "To Be Started",
+      "paymentAmount": 895411,
+      "company": {
+        "id": 2,
+        "name": "XYZ Company",
+        "address": "456 Maple Avenue",
+        "email": "info@xyzcompany.com",
+        "phone": "050-555-5678"
+      },
+      "paymentAuthCode": 867752
+    }
+  ],
+  "status": [
+    {
+      "id": 1,
+      "name": "Submitted"
+    },
+    {
+      "id": 2,
+      "name": "Pending Payment"
+    },
+    {
+      "id": 3,
+      "name": "Payment Successful"
+    },
+    {
+      "id": 4,
+      "name": "In Progress"
+    },
+    {
+      "id": 5,
+      "name": "Completed"
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "name": "ABC Company",
+      "address": "123 Main Street",
+      "email": "info@abccompany.com",
+      "phone": "050-555-1234"
+    },
+    {
+      "id": 2,
+      "name": "XYZ Company",
+      "address": "456 Maple Avenue",
+      "email": "info@xyzcompany.com",
+      "phone": "050-555-5678"
+    }
+  ],
+  "credit-cards": [
+    {
+      "id": 1,
+      "fullName": "The First Client",
+      "cardNumber": "5444444444444444",
+      "expirationDate": "07/25",
+      "cvc": "333",
+      "otp": "684592"
+    },
+    {
+      "id": 1,
+      "fullName": "The Second Client",
+      "cardNumber": "6444444444444444",
+      "expirationDate": "08/26",
+      "cvc": "311",
+      "otp": "852654"
+    }
+  ]
+}
